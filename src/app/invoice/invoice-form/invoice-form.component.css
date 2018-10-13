@@ -1,0 +1,12 @@
+.invoice-form-label{
+    text-align: left;
+}
+.invoice-form-label-head{
+    color: #000;
+}
+.invoice-details-action{
+    width: 13%;
+}
+.invoice-discount-padding{
+    padding-left: 0;
+}

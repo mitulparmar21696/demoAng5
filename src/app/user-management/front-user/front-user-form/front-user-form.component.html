@@ -1,0 +1,310 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <div class="view" id="add_cartype_table">
+      <div class="x_panel">
+        <div class="x_content">
+          <br />
+          <div class="col-md-12 col-sm-12 col-xs-12">
+          <form id="demo-form2" parsley-validate #frontUserForm="ngForm"  class="form-horizontal form-label-left" (ngSubmit)="processForm()">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form group">
+                    <input type="hidden" name="id" class="form-control" #ID="ngModel" [(ngModel)]="frontUser.ID" >
+                </div>
+                 <!-- Image is {{frontUser.ProfileImage}} -->
+                <div class="container">
+                  <h4 style="margin-bottom: 0px">Profile Info</h4>
+                </div>
+                <hr style="margin-bottom: 5px">
+                
+                <!-- image -->
+                <!-- image -->
+  
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px; margin-top: 10px; float: left" for="FirstName">First Name
+                    <span class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12" style="margin-top: 15px">
+                  <input type="text" name="FirstName" maxlength="50" required id="frontUserFirstName" class="form-control col-md-7 col-xs-12" #FirstName="ngModel" [(ngModel)]="frontUser.FirstName">
+                </div>
+              </div>
+  
+              <div class="form-group">
+                  <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px" for="pin-code">Last Name
+                      <span class="required">*</span>
+                  </label>
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                    <input type="text" name="LastName" maxlength="50" required id="frontUserLastName" class="form-control col-md-7 col-xs-12" #LastName="ngModel" [(ngModel)]="frontUser.LastName">
+                  </div>
+                </div>
+  
+              <div class="form-group">
+                  <label class="control-label col-md-4 col-sm-4 col-xs-12"  for="status">Status
+                  </label>
+                  <div class="col-md-8 col-sm-8 col-xs-12 ">
+                      <select id="isActiveId" #StatusValue="ngModel" class="form-control" [(ngModel)]="isActiveId" name="isActiveId" >
+                          <option [value]="" disabled>Select Status</option>
+                          <option *ngFor="let isactive of DropdownIsActiveList" [value]="isactive.id">
+                            {{isactive.name}}
+                          </option>
+                        </select>
+                    <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                  </div>
+                </div>
+  
+                <div class="form-group" style="margin-top:0px">
+                    <label for="upload-Image1" class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px; margin-top: 10px; float: left">Profile Pic
+                  </label>
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                    <input type="file" (change)="onChange($event)" accept="image/*"  style="margin-top: 17px">
+                    <!-- <input id="upload-Image1" class="col-md-8 col-sm-8 col-xs-12" type="file"  (change)="onChange($event)" accept="image/*"/> -->
+                  </div>
+                  </div>
+                
+                  <div *ngIf="frontUser.ProfileImage" class="col-lg-offset-4 col-md-offet-4 col-sm-offset-4" >
+                      <img [src]="frontUser.ProfileImage" class="avatar" alt="Avatar"  style="margin-bottom: 15px;">
+                    </div>
+  
+                <div class="container" style="margin-top: 30px; float:left;">
+                    <h4> Login Info </h4>
+                    <hr>
+                  </div>
+  
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="pin-code" >Email
+                    <span class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  <input pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required type="email" [disabled]="buttonName=='Update'" maxlength="100" name="Admin_Email" id="frontUser_Email"  class="form-control col-md-7 col-xs-12" #AdminEmailID="ngModel" [(ngModel)]="frontUser.EmailID">
+                </div>
+              </div>
+              <div class="form-group" *ngIf="buttonName != 'Update'">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="password" >Password
+                    <span class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  <input type="password"  name="frontUserPassword" id="frontUserPassword" required class="form-control col-md-7 col-xs-12" #Password="ngModel" [(ngModel)]="frontUser.Password" minlength="6">
+                </div>
+              </div>
+
+
+              
+              <div class="container">
+                  <h4 style="margin-bottom: 0px"> Contact Info </h4>
+                </div>
+                <hr>
+
+                <div class="form-group" style=" margin-top: 17px">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="Address1" style="float: left">Address 1
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <textarea id="frontUser_address1" name="FrontUserAddress1"  class="form-control" name="FrontUserAddress1" data-parsley-trigger="keyup" data-parsley-minlength="20"
+                        data-parsley-maxlength="1000" 
+                        data-parsley-validation-threshold="10" #FrontUserAddress1="ngModel" [(ngModel)]="frontUser.Address1" maxlength="1000"></textarea>
+                      
+                    </div>
+                  </div>
+  
+                  <div class="form-group" style=" margin-top: 17px">
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="Address2" style="float: left">Address 2
+                      </label>
+                      <div class="col-md-8 col-sm-8 col-xs-12">
+                          <textarea id="frontUser_address2" name="FrontUserAddress2"  class="form-control" name="FrontUserAddress2" data-parsley-trigger="keyup" data-parsley-minlength="20"
+                          data-parsley-maxlength="1000" 
+                          data-parsley-validation-threshold="10" #FrontUserAdmin="ngModel" [(ngModel)]="frontUser.Address2" maxlength="1000"></textarea>
+                        
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px" for="FrontUsercity">City
+                            <span class="required">*</span>
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                          <input type="text" name="FrontUserCity" maxlength="50" required id="FrontUserCity" class="form-control col-md-7 col-xs-12" #City="ngModel" [(ngModel)]="frontUser.CityName">
+                        </div>
+                      </div>
+
+
+                      <div class="form-group">
+                          <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px" for="pin-code">Pin Code
+                          </label>
+                          <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="text" name="FrontUserPincode" maxlength="50" id="FrontUserPincode" class="form-control col-md-7 col-xs-12" #FrontUserPincode="ngModel" [(ngModel)]="frontUser.Pincode">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="MobileNo" style=" margin-top: 2px">Mobile No
+                              <span class="required">*</span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                              <input type="text" required name="FrontUserMobileNo" id="FrontUserMobileNo" #FrontUserMobileNo="ngModel" (keypress)="keyPressed($event)"  maxlength=20 required [(ngModel)]="frontUser.MobileNo" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+
+                          <div class="form-group">
+                              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="Landline" style=" margin-top: 2px">Landline No
+                              </label>
+                              <div class="col-md-8 col-sm-8 col-xs-12">
+                                <input type="text"  name="Landline" id="Landline" #Landline="ngModel" (keypress)="keyPressed($event)"  maxlength=20  [(ngModel)]="frontUser.Landline" class="form-control col-md-7 col-xs-12">
+                              </div>
+                            </div>
+
+            </div> 
+            <!-- ng if for logininfo -->
+  
+            <div style=" margin-top: 0px">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            
+  
+                <div class="container">
+                    <h4 style="margin-bottom: 0px"> Office Info </h4>
+                  </div>
+                  <hr>
+  
+  
+  
+                  <div class="form-group" style=" margin-top: 17px">
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="OfficeAddress1" style="float: left"> Office Address 1
+                      </label>
+                      <div class="col-md-8 col-sm-8 col-xs-12">
+                          <textarea id="frontUser_officeAddress1" name="Address"  class="form-control" name="OfficeAddress1" data-parsley-trigger="keyup" data-parsley-minlength="20"
+                          data-parsley-maxlength="1000" 
+                          data-parsley-validation-threshold="10" #FrontUserOfficeAddress1="ngModel" [(ngModel)]="frontUser.OfficeAddress1" maxlength="1000"></textarea>
+                      </div>
+                    </div>
+  
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="OfficeAddress2" style="float: left"> Office Address 2
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <textarea id="frontUser_officeAddress2" name="OfficeAddress2"  class="form-control" name="OfficeAddress2" data-parsley-trigger="keyup" data-parsley-minlength="20"
+                            data-parsley-maxlength="1000" 
+                            data-parsley-validation-threshold="10" #FrontUserOfficeAddress2="ngModel" [(ngModel)]="frontUser.OfficeAddress2" maxlength="1000"></textarea>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px" for="FrontUserOfficeCity">City
+                          </label>
+                          <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="text" name="FrontUserOfficeCity" maxlength="50" id="FrontUserOfficeCity" class="form-control col-md-7 col-xs-12" #OfficeCity="ngModel" [(ngModel)]="frontUser.OfficeCity">
+                          </div>
+                        </div>
+  
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="OfficePinCode" style=" margin-top: 3px">Pin Code
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  <input type="string"  name="officePincode" id="OfficePincode" #OfficePincode="ngModel"  [(ngModel)]="frontUser.OfficePincode" class="form-control col-md-7 col-xs-12" maxlength=10>
+                </div>
+              </div>
+  
+  
+              <!-- come back here -->
+              <div class="container" style="margin-top: 17px">
+                <h4 style="margin-bottom: 0px"> Other Info </h4>
+                <hr>
+              </div>
+                    
+              <div class="form-group">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="TypeOfMeal" >Type Of Meal
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  <input type="text"  name="TypeOfMeal" id="TypeOfMeal" #TypeofMeal="ngModel" [(ngModel)]="frontUser.TypeofMeal" class="form-control col-md-7 col-xs-12" maxlength="100">
+                </div>
+              </div>
+  
+              <div class="form-group">
+                  <label class="control-label col-md-4 col-sm-4 col-xs-12" for="SeatPreference" >Seat Preference
+                  </label>
+                  <div class="col-md-8 col-sm-8 col-xs-12">
+                    <input type="text"  name="SeatPreference" id="SeatPreference" #SeatPreference="ngModel" [(ngModel)]="frontUser.SeatPreference" class="form-control col-md-7 col-xs-12" maxlength="100">
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="DOB" >Birth Date
+                    <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input type="date" required name="DOB1" id="DOB1" #DOB1="ngModel" [(ngModel)]="frontUser.DOB1" class="form-control col-md-7 col-xs-12" maxlength="100">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="Anniversary" >Anniversary Date
+                      </label>
+                      <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input type="date"  name="Anniversary" id="Anniversary1" #Anniversary1="ngModel" [(ngModel)]="frontUser.Anniversary1" class="form-control col-md-7 col-xs-12" maxlength="100">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Interests
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <select class="select2_multiple form-control" name="myInterest" #myInterest="ngModel"
+                            
+                             [(ngModel)]="frontUser.MyInterest1" multiple="multiple" id="MyInterest1">
+                               
+                             <option value="Cricket">Cricket</option>
+                             <option value="Traveling">Traveling</option>
+                             <option value="Drawing">Drawing</option>
+                             <option value="Movie">Movie</option>
+                             <option value="Net Surfing">Net Surfing</option>
+                            </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label class="control-label col-md-4 col-sm-4 col-xs-12" for="Others" >Other interests
+                          </label>
+                          <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="text"  name="Others" id="Others" #Others="ngModel" [(ngModel)]="frontUser.Others" class="form-control col-md-7 col-xs-12" maxlength="100">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="Alergy" >Allergy if any
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                              <input type="text"  name="Alergy" id="Alergy" #Alergy="ngModel" [(ngModel)]="frontUser.Alergy" class="form-control col-md-7 col-xs-12" maxlength="100">
+                            </div>
+                          </div>
+
+          
+            
+
+            
+          </div> 
+          <!-- ngif of SecurityQuestionList -->
+  
+          </div>
+  
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                  <button type="submit" class="btn btn-success" [disabled]="!frontUserForm.valid || isInvalidFile">
+                      <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+                <button class="btn btn-primary" type="button" (click)="BackToFrontUser()">
+                  <i class="icon_spac fa fa-close"></i>Cancel</button>
+              </div>
+            </div>
+          </div>
+  
+          </form>
+          <div class="col-md-6 text-left">
+            <!-- <button type="submit" class="btn btn-primary" >
+              <i class="icon_spac fa fa-floppy-o"></i>Previous</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- x_panel end -->
+  </div>
+  </div>
+  

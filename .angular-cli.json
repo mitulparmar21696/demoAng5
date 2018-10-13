@@ -1,0 +1,101 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "adminpanel"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "./assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css",
+        "../node_modules/bootstrap-daterangepicker/daterangepicker.css",
+        "../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css",
+        "../node_modules/nprogress/nprogress.css",
+        "../node_modules/icheck/skins/flat/green.css",
+        "../node_modules/gentelella/vendors/google-code-prettify/bin/prettify.min.css",
+        "../node_modules/select2/dist/css/select2.min.css",
+        "../node_modules/gentelella/vendors/switchery/dist/switchery.min.css",
+        "../node_modules/gentelella/vendors/starrr/dist/starrr.css",
+        "../node_modules/gentelella/vendors/jqvmap/dist/jqvmap.min.css",
+        
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css",
+        "../node_modules/primeicons/primeicons.css",
+        "../node_modules/quill/dist/quill.core.css",
+        "../node_modules/quill/dist/quill.snow.css",
+        "../node_modules/sweetalert2/dist/sweetalert2.min.css",
+        "../node_modules/gentelella/build/css/custom.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js",
+        "../node_modules/bootstrap-progressbar/bootstrap-progressbar.min.js",
+        "../node_modules/bootstrap-daterangepicker/daterangepicker.js",
+        "../node_modules/fastclick/lib/fastclick.js",
+        "../node_modules/nprogress/nprogress.js",
+        "../node_modules/icheck/icheck.min.js",
+        "../node_modules/gentelella/vendors/DateJS/build/date.js",
+        "../node_modules/moment/min/moment.min.js",
+        "../node_modules/gentelella/vendors/jquery.hotkeys/jquery.hotkeys.js",
+        "../node_modules/gentelella/vendors/google-code-prettify/src/prettify.js",
+        "../node_modules/datatables.net/js/jquery.dataTables.js",
+        "../node_modules/select2/dist/js/select2.full.min.js",
+        "../node_modules/parsleyjs/dist/parsley.min.js",
+        "../node_modules/gentelella/vendors/autosize/dist/autosize.min.js",
+        "../node_modules/gentelella/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js",
+        "../node_modules/gentelella/vendors/starrr/dist/starrr.js",
+        "../node_modules/quill/dist/quill.js",
+        "../node_modules/sweetalert2/dist/sweetalert2.min.js"
+       
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

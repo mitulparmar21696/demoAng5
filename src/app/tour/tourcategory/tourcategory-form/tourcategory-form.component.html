@@ -1,0 +1,84 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <div class="view" id="add_tourtype_table">
+    <div class="x_panel">
+      <div class="x_content">
+        <br />
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <form id="demo-form2" parsley-validate #tourCategoryForm="ngForm" class="form-horizontal form-label-left" (ngSubmit)="processForm()">
+            <div class="form group">
+              <input type="hidden" name="id" class="form-control" #ID="ngModel" [(ngModel)]="tourCategory.ID">
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ttcName">Tour Type
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="ddlTourtype" #value="ngModel" class="form-control" [(ngModel)]="ttId" name="ddlTourtype">
+                  <option [ngValue]="0" disabled>Select Tour Type</option>
+                  <option *ngFor="let tt of tourTypeList" [ngValue]="tt.ID">
+                    {{tt.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ttcName">Tour Category
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" id="ttcName" name="Name" required maxlength="100" class="form-control col-md-7 col-xs-12" #Name="ngModel"
+                  [(ngModel)]="tourCategory.Name" placeholder="Tour Category">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tour_message">Description
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <textarea id="tour_message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20"
+                  data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                  data-parsley-validation-threshold="10" #Description="ngModel" [(ngModel)]="tourCategory.Description"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Upload Image">Logo
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="btn-group">
+                  <input type="file" name="imageFile" accept="image/*" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage"
+                    (change)="onChange($event)" />
+                </div>
+                <div *ngIf="tourCategory.Image">
+                  <img src={{tourCategory.Image}} class="avatar" alt="Avatar">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Status
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="tour_type_status" #value="ngModel" class="form-control" [(ngModel)]="isActiveId" name="Id">
+                  <option *ngFor="let isactive of DropdownIsActiveList" [ngValue]="isactive.id">
+                    {{isactive.name}}
+                  </option>
+                </select>
+                <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+              </div>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                <button type="submit" class="btn btn-success" [disabled]="!tourCategoryForm.valid || isInvalidFile">
+                  <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+                <button class="btn btn-primary" type="button" (click)="BackToTourCategory()">
+                  <i class="icon_spac fa fa-close"></i>Cancel</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- x_panel end -->
+  </div>
+</div>

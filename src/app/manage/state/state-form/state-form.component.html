@@ -1,0 +1,76 @@
+<div class="col-md-12 col-lg-12 col-sm-12">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <div class="x_panel">
+      <div class="x_content">
+<br />
+<div class="col-md-6 col-sm-6 col-xs-12">
+<form id="demo-form2" data-parsley-validate #stateform="ngForm" (ngSubmit)="processForm()" class="form-horizontal form-label-left">
+  <div class="form group">
+      <input type="hidden" name="id" class="form-control" #ID="ngModel" [(ngModel)]="state.ID">
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Country Name
+        <span class="required">*</span>
+    </label>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <select id="state_countyName" class="form-control" [(ngModel)]="countryValue" name="countryID" (change)="shouldBe($event)">
+        <option [value]="0" disabled>Select Country</option>
+        <option *ngFor="let country of countries" [value]="country.ID">
+          {{country.Name}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    
+    <label 
+    class="control-label col-md-4 col-sm-4 col-xs-12" 
+    for="stateName">
+    State Name
+    <span class="required">*</span>
+    </label>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <input type="text"
+       id="stateName"
+       required
+       class="form-control col-md-7 col-xs-12"
+       name="name"
+       #stateName = "ngModel"
+       [(ngModel)]="state.Name"
+       required maxlength="50">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name">Status
+    </label>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <select id="facility_type_status" #value="ngModel" class="form-control" [(ngModel)]="isActiveId" name="Id">
+        <option [ngValue]="null" disabled>Select Status</option>
+        <option *ngFor="let isactive of DropdownIsActiveList" [ngValue]="isactive.id">
+          {{isactive.name}}
+        </option>
+      </select>
+      
+    </div>
+  </div>
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+      <button type="submit" class="btn btn-success" [disabled]="!stateform.valid || isInvalidFile">
+        <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+      <button class="btn btn-primary" type="button" data-launch-view="state_table" (click)="BackToState()">
+        <i class="icon_spac fa fa-close"></i>Cancel</button>
+    </div>
+  </div>
+ 
+</form>
+
+</div>
+</div>
+    
+</div>
+
+</div>

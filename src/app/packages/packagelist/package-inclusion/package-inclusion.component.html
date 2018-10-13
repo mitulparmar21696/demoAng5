@@ -1,0 +1,121 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <div class="x_panel">
+    <div class="x_content">
+      <div class="box-header">
+
+        <div class="col-md-5 col-sm-5 col-xs-12">
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ddlDInclusion">All Inclusion
+              <span class="required">*</span>
+            </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <select id="ddlDInclusion" name="DInclusion" required multiple="multiple" class="select2_multiple form-control" #value="ngModel"
+                [(ngModel)]="destinationInclusionId">
+                <option [ngValue]="0" disabled>Select Inclusion</option>
+                <option [ngValue]="d.ID" *ngFor="let d of destinationInclusions">
+                  {{d.Name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-12">
+          <!-- <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+      <button type="submit" class="btn btn-success" (click)="SaveInclusion()">
+        <i class="icon_spac fa fa-floppy-o"></i>Add Inclusion</button>
+    </div> -->
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-12">
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ddlPackageInclusion">Inclusion
+              <span class="required">*</span>
+            </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <select id="ddlPackageInclusion" name="PInclusion" required multiple="multiple" class="select2_multiple form-control" #value="ngModel"
+                [(ngModel)]="packageInclusionId">
+                <option [ngValue]="0" disabled>Package Inclusion</option>
+                <option [ngValue]="p.ID" *ngFor="let p of packageInclusions">
+                  {{p.Name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="clearfix"></div>
+        <br>
+
+        <div>
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ddlDExclusion">All Exclusion
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="ddlDExclusion" name="DExclusion" required multiple="multiple" class="select2_multiple form-control" #value="ngModel"
+                  [(ngModel)]="destinationExclusionId">
+                  <option [ngValue]="0" disabled>Select Exclusion</option>
+                  <option [ngValue]="e.ID" *ngFor="let e of destinationExclusions">
+                    {{e.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+              <!-- <button type="submit" class="btn btn-success" (click)="SaveExclusion()">
+        <i class="icon_spac fa fa-floppy-o"></i>Add Exclusion</button> -->
+            </div>
+          </div>
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ddlPackageExclusion">Exclusion
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="ddlPackageExclusion" name="PExclusion" required multiple="multiple" class="select2_multiple form-control" #value="ngModel"
+                  [(ngModel)]="packageExclusionId">
+                  <option [ngValue]="0" disabled>Package Exclusion</option>
+                  <option [ngValue]="p.ID" *ngFor="let p of packageExclusions">
+                    {{p.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+
+        <div>
+          <div class="col-md-5 col-sm-5 col-xs-12">
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+              <button type="submit" class="btn btn-success" (click)="SaveInclusion()">
+                <i class="icon_spac fa fa-floppy-o"></i>Add Inclusion/Exclusion</button>
+
+              <!-- <button type="submit" class="btn btn-success" (click)="DeleteInclusion()">
+        <i class="icon_spac fa fa-floppy-o"></i>Delete Inclusion/Exclusion</button> -->
+            </div>
+          </div>
+          <div class="col-md-5 col-sm-5 col-xs-12">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 text-left">
+  <button type="submit" class="btn btn-primary" (click)="PreviousPackageinclusion()">
+    <i class="icon_spac fa fa-floppy-o"></i>Previous</button>
+</div>
+<div class="col-md-6 text-right">
+  <button class="btn btn-primary" type="button" (click)="NextPackageexclusion()">
+    <i class="icon_spac fa fa-close"></i>Next</button>
+</div>
+<!-- col end -->

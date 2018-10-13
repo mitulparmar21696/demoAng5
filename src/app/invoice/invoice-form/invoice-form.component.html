@@ -1,0 +1,218 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Invoice</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <br />
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <form id="demo-form2" parsley-validate #invoiceForm="ngForm" class="form-horizontal form-label-left" (ngSubmit)="processForm()">
+          <div class="form group">
+            <input type="hidden" name="id" class="form-control" #ID="ngModel" [(ngModel)]="invoiceDetailForm.InvoiceID">
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12 invoice-form-label invoice-form-label-head">User Name:
+            </label>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12 invoice-form-label">{{invoiceDetailForm.UserName}}
+                </label>
+            </div>
+            <label class="control-label col-md-2 col-sm-2 col-xs-12 invoice-form-label invoice-form-label-head">Email:
+            </label>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12 invoice-form-label">{{invoiceDetailForm.EmailID}}
+                </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12 invoice-form-label invoice-form-label-head">Mobile No:
+            </label>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12 invoice-form-label">{{invoiceDetailForm.MobileNo}}
+                </label>
+            </div>
+          </div>
+          <div class="ln_solid"></div>          
+          <div class="form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12 invoice-form-label invoice-form-label-head">Invoice No:
+            </label>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <input type="text" id="InvoiceNo" name="InvoiceNo" required maxlength="100" class="form-control col-md-7 col-xs-12" #InvoiceNo="ngModel"
+                  [(ngModel)]="invoiceDetailForm.InvoiceNo" disabled>
+            </div>
+
+            <label class="control-label col-md-2 col-sm-2 col-xs-12 invoice-form-label invoice-form-label-head">Invoice Date:
+            </label>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <input type="text" id="InvoiceDateTime" name="InvoiceDateTime" required maxlength="100" class="form-control col-md-7 col-xs-12" #InvoiceDateTime="ngModel"
+                  [(ngModel)]="invoiceDetailForm.InvoiceDate" disabled>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12 invoice-form-label invoice-form-label-head">Due Date:
+            </label>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <input type="text" id="DueDate" name="DueDate" required maxlength="100" class="form-control col-md-7 col-xs-12" #DueDate="ngModel"
+                  [(ngModel)]="invoiceDetailForm.DueDate" disabled>
+            </div>
+            
+            <label class="control-label col-md-2 col-sm-2 col-xs-12 invoice-form-label invoice-form-label-head">Balance Due:
+            </label>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <input type="text" id="DueBalance" name="DueBalance" required maxlength="100" class="form-control col-md-7 col-xs-12" #DueBalance="ngModel"
+                  [(ngModel)]="invoiceDetailForm.DueBalance" disabled>
+            </div>
+          </div>
+
+          <br><br>
+          <div class="row">
+            <div class="col-md-10 col-sm-8 col-xs-12">
+              <table class="table table-bordered">
+                  <thead>
+                      <tr>
+                          <th>Description</th>
+                          <th>Quantity</th>
+                          <th>Rate</th>
+                          <th>Total</th>
+                          
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr *ngFor="let invoice of invoiceDetailForm.InvoiceDetails; let i = index">
+                          <td>
+                              <input [(ngModel)]="invoice.PackageName" class="form-control" type="text" [name]="invoice.PackageName+'_'+i" />
+                          </td>
+                          <td>
+                              <input (keyup)="AmountChange($event, i, 'Quantity')" [(ngModel)]="invoice.Quantity" class="form-control" type="number" [name]="invoice.Quantity+'_quantity'+i" />
+                          </td>
+                          <td>
+                              <input (keyup)="AmountChange($event, i, 'Rate')" [(ngModel)]="invoice.Rate" class="form-control" type="text" [name]="invoice.Rate+'_rate'+i" />
+                          </td>
+                          <td>
+                              <input [(ngModel)]="invoice.Total" class="form-control" type="text" [name]="invoice.Total+'_total'+i" disabled/>
+                          </td>
+                          <td class="invoice-details-action">
+                              <button *ngIf="i > 0" type="button" class="btn btn-danger btn-md" (click)="DeleteInvoiceDetails(i)">
+                                Delete
+                              </button>
+                          </td>
+                      </tr>
+                      <!-- <tr>
+                        <td>
+                            <input class="form-control" type="text" id="newInvoiceItemName" [(ngModel)]="newInvoiceDetails.PackageName" name="newInvoiceItemName" />
+                        </td>
+                        <td>
+                            <input (keyup)="AddAmountChange($event)" class="form-control" type="number" id="newInvoiceQuantity" [(ngModel)]="newInvoiceDetails.Quantity" name="newInvoiceQuantity" />
+                        </td>
+                        <td>
+                            <input (keyup)="AddAmountChange($event)" class="form-control" type="number" id="newInvoiceRate" [(ngModel)]="newInvoiceDetails.Rate" name="newInvoiceRate" />
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" id="newInvoiceTotal" [(ngModel)]="newInvoiceDetails.Total" name="newInvoiceTotal" disabled />
+                        </td>
+                        <td class="invoice-details-action">
+                            <button type="button" *ngIf="invoiceDetails.length > 0" class="btn btn-danger btn-md" (click)="DeleteInvoiceDetails()">
+                              Delete
+                            </button>
+                        </td>
+                    </tr>                         -->
+                  </tbody>
+              </table>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <button type="button" class="btn btn-info btn-md" (click)="AddInvoiceDetails()">
+              Add
+            </button>
+          </div>
+
+          <br><br><br><br>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12 invoice-form-label invoice-form-label-head">SubTotal:
+              </label>
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                  <input type="text" id="SubTotal" name="SubTotal" required maxlength="100" class="form-control col-md-7 col-xs-12" #SubTotal="ngModel"
+                    [(ngModel)]="invoiceDetailForm.SubTotal" disabled>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12 invoice-form-label invoice-form-label-head">Discount Type:
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="invoice-discount-padding col-md-6 col-sm-6 col-xs-12">
+                      <input type="number" (keyup)="DiscountTaxAmountChange($event)" id="DiscountPercentage" name="DiscountPercentage" required maxlength="100" class="form-control col-md-7 col-xs-12" #DiscountPercentage="ngModel"
+                        [(ngModel)]="invoiceDetailForm.DiscountPercentage">
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select id="value" class="form-control" name="Id" [(ngModel)]="discountType" (change)="DiscountTaxAmountChange()">
+                      <option [ngValue]="null" disabled>select</option>
+                      <option [ngValue]="k.value" *ngFor="let k of discountOptions">
+                        {{k.label}}
+                      </option>
+                    </select>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12 invoice-form-label invoice-form-label-head">Discount Amount:
+              </label>
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                  <input type="text" id="Discount" name="Discount" required maxlength="100" class="form-control col-md-7 col-xs-12" #Discount="ngModel"
+                    [(ngModel)]="invoiceDetailForm.Discount" disabled>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12 invoice-form-label invoice-form-label-head">Tax:
+              </label>
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                  <input type="numner" (keyup)="DiscountTaxAmountChange($event)" id="Tex" name="Tex" required maxlength="100" class="form-control col-md-7 col-xs-12" #TaxAmount="ngModel"
+                    [(ngModel)]="invoiceDetailForm.Tex">
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12 invoice-form-label invoice-form-label-head">Total:
+              </label>
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                  <input type="text" id="GrandTotal" name="GrandTotal" required maxlength="100" class="form-control col-md-7 col-xs-12" #GrandTotal="ngModel"
+                    [(ngModel)]="invoiceDetailForm.GrandTotal" disabled>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+              <button type="submit" class="btn btn-success" [disabled]="!invoiceForm.valid">
+                <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+              <button class="btn btn-primary" type="button" data-launch-view="invoice_table" (click)="BackToInvoice()">
+                <i class="icon_spac fa fa-close"></i>Cancel</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  
+</div>

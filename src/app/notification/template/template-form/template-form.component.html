@@ -1,0 +1,117 @@
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+          <form id="demo-form2" parsley-validate #hotelForm="ngForm"  class="form-horizontal form-label-left" (ngSubmit)="processForm()">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                
+
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tour-type">
+                    </label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="iCheck"   [checked]="template.UserType === 'Agent'" disabled > Agent
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="radio">
+                                <label>
+                                  <input type="radio"  name="iCheck"  [checked]="template.UserType === 'Customer'" disabled> Customer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Events
+                    </label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <!-- <select class="form-control" id="events_data">
+                        <option value="active">Select Event</option>
+                       </select> -->
+                       <label class="control-label"> {{template.EventID}}</label>
+                       
+                      <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">For Email<span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="IsEmail" [(ngModel)]="template.IsEmail" #IsEmail="ngModel">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="landline-Number">Subject
+                    </label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" id="hotel_landline" placeholder="Subject" name="Subject" [(ngModel)]="template.Subject" #Subject="ngModel" class="form-control col-md-7 col-xs-12" >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pin-code">Content<span class="required">*</span>
+                    </label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <div>
+                        <p-editor name="teDescription" [(ngModel)]="template.EmailText" name="EmailText" #EmailText="ngModel" [style]="{'height':'320px'}"></p-editor>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">For SMS<span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="IsSMS" [(ngModel)]="template.IsSMS" #IsSMS="ngModel">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="landline-Number">SMS
+                    </label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <textarea id="add_message"  class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                    data-parsley-validation-threshold="10" name="SMSText" [(ngModel)]="template.SMSText" #SMSText="ngModel"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">For Push Notification<span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"  name="IsPushNotification" [(ngModel)]="template.IsPushNotification" #IsPushNotification="ngModel">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="landline-Number">Notification
+                    </label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <textarea id="add_message"  class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                    data-parsley-validation-threshold="10" name="PushNotificationText" [(ngModel)]="template.PushNotificationText" #PushNotificationText="ngModel"></textarea>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                      <button type="submit" class="btn btn-success"><i class="icon_spac fa fa-floppy-o"></i>Update</button>
+                      <button class="btn btn-primary" type="button" (click)="backRedirection()" data-launch-view="tourtype_table"><i class="icon_spac fa fa-close"></i>Cancel</button>
+                    </div>
+                  </div>
+            </div>
+            </form>
+              
+          </div>

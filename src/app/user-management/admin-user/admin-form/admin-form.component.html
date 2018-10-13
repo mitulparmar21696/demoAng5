@@ -1,0 +1,304 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <div class="view" id="add_cartype_table">
+    <div class="x_panel">
+      <div class="x_content">
+        <br />
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        <form id="demo-form2" parsley-validate #adminUserForm="ngForm"  class="form-horizontal form-label-left" (ngSubmit)="processForm()">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form group">
+                  <input type="hidden" name="id" class="form-control" #ID="ngModel" [(ngModel)]="adminUser.ID" >
+              </div>
+               <!-- Image is {{adminUser.Image}} -->
+              <div class="container">
+                <h4 style="margin-bottom: 0px">Profile Info</h4>
+              </div>
+              <hr style="margin-bottom: 5px">
+              <!-- <div class="card image-upload " style="width: 200px; margin-bottom: 10px;  margin-top: 10px; height: 165px;" > -->
+                <!-- <label for="file-input" #mycanvasUpdate> -->
+                  <!-- <div *ngIf="adminUser.Image">
+                    <img [src]="adminUser.Image" style="pointer-events: none"  style="width: 130px; margin-bottom: 10px;  margin-top: 10px; height: 130px;">
+                  </div> -->
+                  <!-- <div *ngIf="adminUser.Image == undefined || adminUser.Image == ''">
+                    <img  src="../../../../assets/images/user.png" style="pointer-events: none"  style="width: 130px; margin-bottom: 10px;  margin-top: 10px; height: 130px; ">
+                  </div> -->
+                <!-- <canvas *ngIf="adminUser.Image && uploaded != undefined">
+                    <img [src]="adminUser.Image" alt="card image" style="pointer-events: none"  style="width: 400px; margin-bottom: 5px;  margin-top: 5px; height: 198px">
+                </canvas> -->
+                <!-- <canvas    #mycanvasAdd  *ngIf="adminUser.ID == undefined">
+                    <div *ngIf="uploaded != undefined">
+
+                    <img class="card-img-top" src="../../../../assets/images/user.png" alt="Card image" style="pointer-events: none"/>
+                  </div>
+                  </canvas>
+              
+                <div *ngIf="uploaded == undefined">
+                    <img class="card-img-top" src="../../../../assets/images/user.png" alt="Card image" style="pointer-events: none"/>
+                </div> -->
+              
+              <!-- image -->
+              <!-- image -->
+
+            <div class="form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px; margin-top: 10px; float: left" for="FirstName">First Name
+                  <span class="required">*</span>
+              </label>
+              <div class="col-md-8 col-sm-8 col-xs-12" style="margin-top: 15px">
+                <input type="text" name="FirstName" maxlength="50" required id="FirstName" class="form-control col-md-7 col-xs-12" #FirstName="ngModel" [(ngModel)]="adminUser.FirstName">
+              </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px" for="pin-code">Last Name
+                    <span class="required">*</span>
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  <input type="text" name="LastName" maxlength="50" required id="LastName" class="form-control col-md-7 col-xs-12" #LastName="ngModel" [(ngModel)]="adminUser.LastName">
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px" for="pin-code">Branch Name
+                      <span class="required">*</span>
+                  </label>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                  <select id="branchIdValue" required name="branchIdValue" class="form-control" #value="ngModel" [(ngModel)]="adminUser.BranchID" (change)="ChangedBranch()">
+                    <option [value]="0" disabled>Select Branch Name</option>
+                    <option *ngFor="let branch of branches" [value]="branch.ID">
+                      {{branch.BranchName}}
+                    </option>
+                  </select>
+                </div>
+                </div>
+
+
+            <div class="form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12 "  for="last-name">Role
+                  <span class="required">*</span>
+              </label>
+              <div class="col-md-8 col-sm-8 col-xs-12 ">
+                <select id="RoleID" required class="form-control" #RoleID="ngModel" [(ngModel)]="adminUser.RoleID"  name="RoleID" (changedRole)="ChangedRole()">
+                  <option [value]="0" disabled>Select Role</option>
+                  <option *ngFor="let role of roles" [value]="role.RoleID">
+                    {{role.RoleName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-md-4 col-sm-4 col-xs-12"  for="status">Status
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12 ">
+                    <select id="isActiveId" #StatusValue="ngModel" class="form-control" [(ngModel)]="isActiveId" name="isActiveId" >
+                        <option [value]="" disabled>Select Status</option>
+                        <option *ngFor="let isactive of DropdownIsActiveList" [value]="isactive.id">
+                          {{isactive.name}}
+                        </option>
+                      </select>
+                  <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top:0px">
+                  <label for="upload-Image1" class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-bottom: 3px; margin-top: 10px; float: left">Profile Pic
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  <input type="file" (change)="onChange($event)" accept="image/*"  style="margin-top: 17px">
+                  <!-- <input id="upload-Image1" class="col-md-8 col-sm-8 col-xs-12" type="file"  (change)="onChange($event)" accept="image/*"/> -->
+                </div>
+                </div>
+              
+                <div *ngIf="adminUser.Image" class="col-lg-offset-4 col-md-offet-4 col-sm-offset-4">
+                    <img [src]="adminUser.Image" class="avatar" alt="Avatar">
+                  </div>
+              <div > 
+
+                    <div class="container" style="margin-top: 75px">
+                        <h4 style="margin-bottom: 0px"> Login Info </h4>
+                      </div>
+                      <hr>
+
+                  <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="pin-code" >Email
+                        <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [disabled]="buttonName == 'Update'" type="email" maxlength="100" name="Admin_Email" id="adminUser_Email"  class="form-control col-md-7 col-xs-12" #AdminEmailID="ngModel" [(ngModel)]="adminUser.EmailID">
+                    </div>
+                  </div>
+                  <div class="form-group" *ngIf="buttonName == 'Add'">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="password" >Password
+                        <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input type="password"  name="admin_password" id="adminUser_password" class="form-control col-md-7 col-xs-12" #Password="ngModel" [(ngModel)]="adminUser.Password" minlength="6">
+                    </div>
+                  </div>
+              </div>
+
+          </div> 
+          <!-- ng if for logininfo -->
+
+          <div style=" margin-top: 0px">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+          
+
+              <div class="container">
+                  <h4 style="margin-bottom: 0px"> Contact Info </h4>
+                </div>
+                <hr>
+
+
+
+                <div class="form-group" style=" margin-top: 17px">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="Address" style="float: left">Address
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <textarea id="adminUser_description" name="Address"  class="form-control" name="Address" data-parsley-trigger="keyup" data-parsley-minlength="20"
+                        data-parsley-maxlength="1000" 
+                        data-parsley-validation-threshold="10" #Admin="ngModel" [(ngModel)]="adminUser.Address" maxlength="1000"></textarea>
+                      
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-top: 6px" for="status">Country
+                        <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select id="Country" #Country class="form-control" [(ngModel)]="adminUser.CountryID" name="country" (change)="GetCountryId(adminUser.CountryID)">
+                            <option [value]="0" disabled>Select Country</option>
+                            <option *ngFor="let country of Countries" [value]="country.ID">
+                              {{country.Name}}
+                            </option>
+                          </select>
+                      <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-top: 4px" for="state">State
+                        <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select id="State" #State class="form-control" [(ngModel)]="stateId" name="State" (change)="GetStateId(stateId)">
+                            <option [value]="0" disabled>Select State</option>
+                            <option *ngFor="let state of States" [value]="state.ID">
+                              {{state.StateName}}
+                            </option>
+                          </select>
+                      <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12" style=" margin-top: 3px" for="status">City
+                        <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select id="City" #City class="form-control" [(ngModel)]="adminUser.CityID" name="City" (change)="ChangeCity()">
+                            <option [value]="0" disabled>Select City</option>
+                            <option *ngFor="let city of Cities" [value]="city.ID">
+                              {{city.CityName}}
+                            </option>
+                          </select>
+                      <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                    </div>
+                  </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="PinCode" style=" margin-top: 3px">Pin Code
+              </label>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                <input type="string"  name="Pincode" id="Pincode" #Pincode="ngModel"  [(ngModel)]="adminUser.Pincode" class="form-control col-md-7 col-xs-12" maxlength=10>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="MobileNo" style=" margin-top: 2px">Mobile No
+                <span class="">*</span>
+              </label>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                <input type="text"  name="MobileNo" id="Mobile" #MobileNo="ngModel" (keypress)="keyPressed($event)"  maxlength=20 required [(ngModel)]="adminUser.MobileNo" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+
+            
+            <div class="form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="pin-code" >Alternate Email
+                  <span class="required">*</span>
+              </label>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" maxlength="100" name="AltEmail" id="adminUser_AltEmail" class="form-control col-md-7 col-xs-12" #AltEmailID="ngModel" [(ngModel)]="adminUser.AlternetEmailID" required>
+              </div>
+            </div>
+
+            <!-- come back here -->
+            <div *ngIf="buttonName == 'Add'"> 
+            <div class="container" style="margin-top: 17px">
+              <h4 style="margin-bottom: 0px"> Security Info </h4>
+            </div>
+            <hr>
+                        
+            <div class="form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name" >Security Question
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                <select  class="form-control" name="SecurityQuestion" #SecurityQuestion="ngModel" [(ngModel)]="adminUser.SecurityQuestion" id="SecurityQuestion" (change)="ChangedSecurityQuestions()">
+                  <option value="0" disabled>Select Security Question</option>
+                  <option value="What is your pet's name?">What is your pet's name?</option>
+                  <option value="In which year was your father born?">In which year was your father born?</option>
+                  <option value="Who is your favorite actor?">Who is your favorite actor?</option>
+                  <option value="Which is your favorite movie?">Which is your favorite movie?</option>
+                </select>
+                <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+              </div>
+            
+            </div>
+           
+
+            <div class="form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="securityAnswer" >Security Answer
+                  <span class="required">*</span>
+              </label>
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                <input type="text"  name="securityAnswer" id="securityAnswer" #SecurityAnswer="ngModel" [(ngModel)]="adminUser.SecurityAnswer" class="form-control col-md-7 col-xs-12" maxlength="100">
+              </div>
+            </div>
+
+          </div>
+          
+        </div> 
+        <!-- ngif of SecurityQuestionList -->
+
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <button type="submit" class="btn btn-success" [disabled]="!adminUserForm.valid || isInvalidFile">
+                    <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+              <button class="btn btn-primary" type="button" (click)="BackToAdminUser()">
+                <i class="icon_spac fa fa-close"></i>Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        </form>
+        <div class="col-md-6 text-left">
+          <!-- <button type="submit" class="btn btn-primary" >
+            <i class="icon_spac fa fa-floppy-o"></i>Previous</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- x_panel end -->
+</div>
+</div>

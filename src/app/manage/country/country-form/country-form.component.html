@@ -1,0 +1,81 @@
+<div class="col-md-12 col-lg-12 col-sm-12">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <div class="x_panel">
+        <div class="x_content">
+<br />
+<div class="col-md-6 col-sm-6 col-xs-12">
+<form id="demo-form2" data-parsley-validate #countryform="ngForm" (ngSubmit)="processForm()" class="form-horizontal form-label-left">
+    <div class="form group">
+        <input type="hidden" name="id" class="form-control" #ID="ngModel" [(ngModel)]="country.ID">
+    </div>
+    <div class="form-group">
+      
+      <label 
+      class="control-label col-md-3 col-sm-3 col-xs-12" 
+      for="countryName">
+      Country Name
+      <span class="required">*</span>
+      </label>
+      <div class="col-md-9 col-sm-9 col-xs-12">
+        <input type="text"
+         id="countryName"
+         required
+         class="form-control col-md-7 col-xs-12"
+         name="name"
+         #countryName = "ngModel"
+         [(ngModel)]="country.Name"
+         required minlength="4" maxlength="50">
+      </div>
+    </div>
+
+    <div class="form-group">
+      
+        <label 
+        class="control-label col-md-3 col-sm-3 col-xs-12" 
+        for="countryShortName">
+        Short Name
+        </label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text"
+           id="ShortName"
+           class="form-control col-md-7 col-xs-12"
+           name="ShortName"
+           #ShortName = "ngModel"
+           [(ngModel)]="country.ShortName"
+            maxlength="4" >
+        </div>
+      </div>
+   
+    
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Status
+      </label>
+      <div class="col-md-9 col-sm-9 col-xs-12">
+        <select id="facility_type_status" #value="ngModel" class="form-control" [(ngModel)]="isActiveId" name="Id">
+          <option [ngValue]="null" disabled>Select Status</option>
+          <option *ngFor="let isactive of DropdownIsActiveList" [ngValue]="isactive.id">
+            {{isactive.name}}
+          </option>
+        </select>
+        <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+      </div>
+    </div>
+    <div class="ln_solid"></div>
+    <div class="form-group">
+      <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+        <button type="submit" class="btn btn-success" [disabled]="!countryform.valid || isInvalidFile">
+          <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+        <button class="btn btn-primary" type="button" data-launch-view="country_table" (click)="BackToCountry()">
+          <i class="icon_spac fa fa-close"></i>Cancel</button>
+      </div>
+    </div>
+   
+  </form>
+<!-- 
+  {{facilityform.value | json}} -->
+</div>
+</div>
+      
+</div>
+
+</div>

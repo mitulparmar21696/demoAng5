@@ -1,0 +1,17 @@
+<div>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="form-group">
+      <p-editor [(ngModel)]="tcText" [style]="{'height':'320px'}"></p-editor>
+    </div>
+  </div>
+  <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+    <div class="form-group">
+      <button type="submit" class="btn btn-success" (click)="SaveTermsAndConditions()">
+        <i class="icon_spac fa fa-floppy-o"></i>Save</button>
+      <button class="btn btn-primary" type="button" (click)="navigateToDestination()">
+        <i class="icon_spac fa fa-close"></i>Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="container body">
+    <div class="main_container" *ngIf="isLoggedIn$">
+        <app-layout-header></app-layout-header>
+
+        <app-layout-headerprofile></app-layout-headerprofile>
+
+        <div class="right_col" role="main">
+            <div class="clearfix"></div>
+            <router-outlet></router-outlet>
+        </div>
+        <!-- /page content -->
+
+
+        <app-layout-footer></app-layout-footer>
+    </div>
+    <div class="main_container" *ngIf="!isLoggedIn$">
+        <login-layout></login-layout>
+    </div>
+</div>

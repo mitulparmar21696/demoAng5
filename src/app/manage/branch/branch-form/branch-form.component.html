@@ -1,0 +1,117 @@
+     
+ <div class="" id="add_branch_table">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <div class="x_panel">
+       <div class="x_content">
+            <h2>Branch</h2>
+          <br />
+          <form id="demo-form2" #branchForm="ngForm"  class="form-horizontal form-label-left" (ngSubmit)="processForm(branchForm)">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <!-- <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Company-name">Company Name <span class="required">*</span>
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" id="company-name" required class="form-control col-md-7 col-xs-12">
+                   </div>
+                </div> -->
+                
+                <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Branch-name">Branch Name <span class="required">*</span>
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" id="branch-name" required class="form-control col-md-7 col-xs-12" name="BranchName" #BranchName="ngModel" [(ngModel)]="branch.BranchName">
+                   </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address-1">Address 1 <span class="required">*</span>
+                    </label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                       <textarea id="add_message" required class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                          data-parsley-validation-threshold="10" name="Address1" #Address1="ngModel" [(ngModel)]="branch.Address1"></textarea>
+                    </div>
+                 </div>
+                <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address-2"> Address 2 <span class="required">*</span>
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <textarea id="add_message" required class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                         data-parsley-validation-threshold="10" name="Address2" #Address2="ngModel" [(ngModel)]="branch.Address2"></textarea>
+                   </div>
+                </div>
+                <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Mobile-Number">Mobile Number
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" id="branch_mobileno" class="form-control col-md-7 col-xs-12" name="MobileNo" #MobileNo="ngModel" [(ngModel)]="branch.MobileNo">
+                   </div>
+                </div>
+                <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Email-Address"> Email Address
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" id="branch_email" class="form-control col-md-7 col-xs-12" name="Email" #Email="ngModel" [(ngModel)]="branch.Email">
+                   </div>
+                </div>
+             </div>
+             <div class="col-md-6 col-sm-6 col-xs-12">
+                
+                <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">City <span class="required">*</span>
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select required class="form-control" id="city-type" name="CityID" #CityID="ngModel" [(ngModel)]="branch.CityID">
+                         <option value="" disabled>Select City</option>
+                         <option *ngFor="let ct of cities" [value]="ct.ID">
+                            {{ct.Name}}
+                          </option>
+                      </select>
+                      <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                   </div>
+                </div>
+                
+                <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pin-code">Pin code 
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" id="hotel_pin-code" class="form-control col-md-7 col-xs-12" name="Pincode" #Pincode="ngModel" [(ngModel)]="branch.Pincode">
+                   </div>
+                </div>
+                <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="landline-Number">Land Line
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" id="hotel_landline" class="form-control col-md-7 col-xs-12" name="Landline" #Landline="ngModel" [(ngModel)]="branch.Landline">
+                   </div>
+                </div>
+                <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Contact-Person">Contact Person <span class="required">*</span>
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" id="parson-name" required class="form-control col-md-7 col-xs-12"  name="ContactPerson" #ContactPerson="ngModel" [(ngModel)]="branch.ContactPerson">
+                   </div>
+                </div>
+                <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status
+                   </label>
+                   <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select class="form-control" id="hotel_status" name="IsActive" #IsActive="ngModel" [(ngModel)]="branch.IsActive">
+                         <option value="1">Active</option>
+                         <option value="0">Inactive</option>
+                      </select>
+                   </div>
+                </div>
+             </div>
+             <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                   <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                      <button type="submit" class="btn btn-success"><i class="icon_spac fa fa-floppy-o"></i>Add</button>
+                      <button class="btn btn-primary" type="button" (click)="redirectBack()" data-launch-view="branch_table"><i class="icon_spac fa fa-close"></i>Cancel</button>
+                   </div>
+                </div>
+             </div>
+          </form>
+       </div>
+    </div>
+    <!-- x_panel end -->
+ </div>

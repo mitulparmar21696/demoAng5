@@ -1,0 +1,114 @@
+<div *ngIf="isDisplay">
+  <div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <form id="packageItineraryForm" parsley-validate class="form-horizontal form-label-left" #packageItineraryForm="ngForm" (ngSubmit)="SavePackageItineraryDetails()">
+
+      <div class="col-md-12 col-sm-12 col-xs-12" *ngFor="let itinerary of localIties;let i = index">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Day {{i+1}}
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li>
+                <a class="collapse-link">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div class="all_users">
+              <div class="form-group">
+                <input type="hidden" [(ngModel)]="itinerary.ID" name="itineraryid-{{i}}">
+                <input type="hidden" [(ngModel)]="itinerary.Day" name="Day-{{i}}">
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="ddlCity">City
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select class="form-control" [(ngModel)]="itinerary.CityID" name="CityID-{{i}}">
+                    <option [ngValue]="0" disabled>Select City</option>
+                    <option *ngFor="let dd of cities" [ngValue]="dd.ID">
+                      {{dd.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="txtLocation">Location
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" name="location-{{i}}" class="form-control col-md-7 col-xs-12" placeholder="Location" required [(ngModel)]="itinerary.Location">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="txtTitle">Itinerary Title
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" name="title-{{i}}" class="form-control col-md-7 col-xs-12" placeholder="Title" required [(ngModel)]="itinerary.Title">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="ddlFacility">Facility
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select name="Facility-{{i}}" required multiple="multiple" class="select2_multiple form-control" #value="ngModel" [(ngModel)]="itinerary.FacilityID">
+                    <option [ngValue]="0" disabled>Select Facility</option>
+                    <option [ngValue]="h.ID" *ngFor="let h of facilities">
+                      {{h.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="txtDescription">Description
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <textarea name="Description-{{i}}" class="form-control col-md-7 col-xs-12" placeholder="Description" required [(ngModel)]="itinerary.Description">
+                     </textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="status">Status
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select class="form-control" [(ngModel)]="isActiveId" name="ddlIsActive-{{i}}">
+                    <option [ngValue]="null" disabled>Select Status</option>
+                    <option *ngFor="let isactive of DropdownIsActiveList" [ngValue]="isactive.id">
+                      {{isactive.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ln_solid"></div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="form-group">
+          <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+            <button type="submit" class="btn btn-success" [disabled]="!packageItineraryForm.valid || isClicked">
+              <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+            <button class="btn btn-primary" type="button" (click)="CancelItinerary()">
+              <i class="icon_spac fa fa-close"></i>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="col-md-6 text-left">
+  <button class="btn btn-primary" type="button" (click)="PreviousPackageitinerary()">
+    <i class="icon_spac fa fa-floppy-o"></i>Previous</button>
+</div>
+<div class="col-md-6 text-right">
+  <button class="btn btn-primary" type="button" (click)="NextPackageitinerary()">
+    <i class="icon_spac fa fa-close"></i>Next</button>
+</div>

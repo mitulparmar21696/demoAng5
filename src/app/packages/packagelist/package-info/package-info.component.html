@@ -1,0 +1,22 @@
+<div class="x_content">
+  <div class="form-group">
+    <p-editor name="tePackageInfo" [(ngModel)]="tePackageInfo" [style]="{'height':'320px'}"></p-editor>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+      <button type="submit" class="btn btn-success" (click)="SavePackageInfo()">
+        <i class="icon_spac fa fa-floppy-o"></i>Save</button>
+      <button class="btn btn-primary" type="button" (click)="CancelPackageInfo()">
+        <i class="icon_spac fa fa-close"></i>Cancel</button>
+    </div>
+  </div>
+
+</div>
+<div class="col-md-6 text-left">
+  <button type="submit" class="btn btn-primary" (click)="PreviousPackageInfo()">
+    <i class="icon_spac fa fa-floppy-o"></i>Previous</button>
+</div>
+<div class="col-md-6 text-right">
+  <button class="btn btn-primary" type="button" (click)="NextPackageInfo()">
+    <i class="icon_spac fa fa-close"></i>Next</button>
+</div>

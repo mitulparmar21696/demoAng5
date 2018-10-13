@@ -1,0 +1,82 @@
+<div class="row">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Latest Tour Destinations
+              <!--<small>Try hovering over the rows</small>-->
+            </h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Desination Name</th>
+                  <th>Status</th>
+                  <!--<th>Username</th>-->
+                </tr>
+              </thead>
+              <tbody >
+                <tr *ngFor="let tour of tourDestination">
+                  <th scope="row">{{tour.No}}</th>
+                  <td>{{tour.DestinationName}}</td>
+                  <td>
+                    <span *ngIf="tour.IsActive==1">Active</span>
+                    <span *ngIf="tour.IsActive==0">In-Active</span>
+                  </td>
+                  <!-- <td>@mdo</td>-->
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-right">
+              <button type="button" class="btn btn-danger" (click)="viewDestinations()">
+                <i class="fa fa-eye" style="margin-right: 5px;"></i>View All Destinations</button>
+            </div>
+    
+          </div>
+    
+        </div>
+      </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Latest Packages
+          <!--<small>Try hovering over the rows</small>-->
+        </h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Package Name</th>
+              <th>Status</th>
+              <!--<th>Username</th>-->
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let pac of packages">
+              <th scope="row">{{pac.No}}</th>
+              <td>{{pac.PackageName}}</td>
+              <td>
+                <span *ngIf="pac.IsActive==1">Active</span>
+                <span *ngIf="pac.IsActive==0">In-Active</span>
+              </td>
+              <!-- <td>@mdo</td>-->
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-right">
+          <button type="button" class="btn btn-danger" (click)="viewPackage()">
+            <i class="fa fa-eye" style="margin-right: 5px;"></i>View All Packages</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

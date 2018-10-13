@@ -1,0 +1,187 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <div class="view" id="add_cartype_table">
+      <div class="x_panel">
+        <div class="x_content">
+          <br />
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <form id="demo-form2" parsley-validate #bannerForm="ngForm"  class="form-horizontal form-label-left" (ngSubmit)="processForm()">
+                 <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form group">
+                    <input type="hidden" name="id" class="form-control" #ID="ngModel" [(ngModel)]="banner.ID" >
+                </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="banner-tital">Banner Title 
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" name="BannerTitle " maxlength="100" required id="BannerTitle" class="form-control col-md-7 col-xs-12" #BannerTitle="ngModel" [(ngModel)]="banner.BannerTitle">
+                  
+                  <!-- <input type="text" id="banner_tital" required class="form-control col-md-7 col-xs-12"> -->
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="banner-type">Banner Type <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <select required (change)="GetDestination(tttype);" class="form-control" name="Star" #value="ngModel" [(ngModel)]="tttype" id="banner-type">
+                    <option value="0">Select type</option>
+                    <option value="1">Destination</option>
+                    <option value="2">Package</option>
+                    <option value="3">Promotional / Others</option>
+                  </select>
+                  <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                </div>
+              </div>
+           
+            <div class="form-group" [hidden]="!destinationdiv">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="banner-type">Destination <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select required (change)="GetPackage(ttdestination);" class="form-control" name="ttdestination" #value="ngModel" [(ngModel)]="ttdestination" id="banner-type">
+                    <option [ngValue]="0" disabled>Select Destination</option>
+                    <!-- <option [value]="null" disabled>Select Country</option> -->
+                      <option *ngFor="let destination of destination" [value]="destination.DestinationID" >
+                        {{destination.DestinationName}}
+                      </option>
+                </select>
+                <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+              </div>
+            </div>
+            <div class="form-group" [hidden]="!packagediv">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="banner-type">Package <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <select required  class="form-control" name="ttpackage" #value="ngModel" [(ngModel)]="ttpackage" id="banner-type">
+                      <option [ngValue]="0" disabled>Select Package</option>
+                      <!-- <option [value]="null" disabled>Select Country</option> -->
+                        <option *ngFor="let package of package" [value]="package.PackageID" >
+                          {{package.PackageName}}
+                        </option>
+                  </select>
+                  <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="banner-type">Banner For <span class="required">*</span>
+                  </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <select required class="form-control" name="ttbannerFor" #value="ngModel" [(ngModel)]="ttbannerFor" id="banner-type">
+                      <option value="0" disabled>Select for</option>
+                      <option value="1">App</option>
+                      <option value="2">Web</option>
+                      
+                    </select>
+                    <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+                  </div>
+                </div>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Upload Image">Banner Image
+                      <!-- <span class="required">*</span> -->
+                  </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div class="btn-group"  style="margin-top: 7px;">
+                      <input type="file" required name="imageFile" accept="BannerImage/*" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage"
+                        (change)="onChange($event)" />
+                    </div>
+                    <div *ngIf="banner.BannerImage">
+                      <img src={{banner.BannerImage}} class="avatar" alt="Avatar">
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            
+              <!-- <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="from-date">From Date
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+              
+                  <fieldset>
+                    <div class="control-group">
+                      <div class="controls">
+                        <div class="xdisplay_inputx form-group has-feedback">
+                          <input type="text" name="FromDate" #FromDate="ngModel" [(ngModel)]="banner.FromDate" class="form-control has-feedback-left" id="single_cal2" placeholder="From Date" aria-describedby="inputSuccess2Status2" readonly>
+                          <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                          <span id="inputSuccess2Status2" class="sr-only">(success)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+              </div>
+            </div> -->
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="banner-tital">From Date
+                  <!-- <span class="required">*</span> -->
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" name="FromDate" #FromDate="ngModel" [(ngModel)]="banner.FromDate"  id="BannerTitle" class="form-control col-md-7 col-xs-12" >
+                 
+                 <!-- <input type="text" id="banner_tital" required class="form-control col-md-7 col-xs-12"> -->
+                </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="banner-tital">To Date 
+                    <!-- <span class="required">*</span> -->
+                  </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" name="ToDate" #ToDate="ngModel" [(ngModel)]="banner.ToDate" maxlength="100"  id="BannerTitle" class="form-control col-md-7 col-xs-12">
+                    
+                    <!-- <input type="text" id="banner_tital" required class="form-control col-md-7 col-xs-12"> -->
+                  </div>
+                 </div>
+            <!-- <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="to-date">To Date
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <fieldset>
+                    <div class="control-group">
+                      <div class="controls">
+                        <div class="xdisplay_inputx form-group has-feedback">
+                          <input type="text" name="ToDate" #ToDate="ngModel" [(ngModel)]="banner.ToDate" class="form-control has-feedback-left" id="single_cal3" placeholder="To date" aria-describedby="inputSuccess2Status2" readonly>
+                          <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                          <span id="inputSuccess2Status2" class="sr-only">(success)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+              </div>
+            </div> --> 
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                  <select id="car_type_status" #value="ngModel" class="form-control" [(ngModel)]="isActiveId" name="Id">
+                      <option [ngValue]="0" disabled>Select Status</option>
+                      <option *ngFor="let isactive of DropdownIsActiveList" [ngValue]="isactive.id">
+                        {{isactive.name}}
+                      </option>
+                    </select>
+                <!--<input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">-->
+              </div>
+            </div>
+
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="ln_solid"></div>
+                      <div class="form-group">
+                          <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                              <button type="submit" class="btn btn-success" [disabled]="!bannerForm.valid || isInvalidFile">
+                                  <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+                            <button class="btn btn-primary" type="button" (click)="BackToBanner()">
+                              <i class="icon_spac fa fa-close"></i>Cancel</button>
+                          </div>
+                      </div>
+                </div>
+            
+          </form>
+          <div class="col-md-6 text-left">
+            <!-- <button type="submit" class="btn btn-primary" >
+              <i class="icon_spac fa fa-floppy-o"></i>Previous</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- x_panel end -->
+  </div>
+</div>

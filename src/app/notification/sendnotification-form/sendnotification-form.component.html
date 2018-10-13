@@ -1,0 +1,105 @@
+  <div class="col-md-12 col-sm-12 col-xs-12">
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+        <div  id="add_tourtype_table">
+          <div class="x_panel">
+              <div class="x_content">
+                  
+                <br />
+                <form id="demo-form2" #notificationForm="ngForm"  class="form-horizontal form-label-left" (ngSubmit)="processForm()">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Users</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select required class="select2_multiple form-control" multiple="multiple" id="hotel_facility" 
+                          name="UserID" #FacilityId="ngModel" [(ngModel)]="notifications.UserID" [disabled]="isView"
+                          >
+                            <!-- <option>abc</option> -->
+                            <!-- <option>xyz</option> -->
+                            <option *ngFor="let usr of users" [value]="usr.ID">
+                              {{usr.FirstName}} {{usr.LastName}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">For Email<span class="required">*</span></label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="IsEmail" #IsEmail="ngModel" [disabled]="isView" [(ngModel)]="notifications.IsEmail">
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="landline-Number">Subject
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" id="hotel_landline" placeholder="Subject" name="Subject" #Subject="ngModel" [(ngModel)]="notifications.Subject" class="form-control col-md-7 col-xs-12" [disabled]="isView">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pin-code">Content<span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <p-editor  [style]="{'height':'320px'}" name="EmailText" #EmailText="ngModel" [(ngModel)]="notifications.EmailText" ></p-editor>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">For SMS<span class="required">*</span></label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" [disabled]="isView" name="IsSMS" #IsSMS="ngModel" [(ngModel)]="notifications.IsSMS">
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="landline-Number">SMS
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <textarea id="add_message"  class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                        data-parsley-validation-threshold="10" [disabled]="isView" name="SMSText" #SMSText="ngModel" [(ngModel)]="notifications.SMSText"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">For Push Notification<span class="required">*</span></label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" [disabled]="isView" name="IsPushNotification" #IsPushNotification="ngModel" [(ngModel)]="notifications.IsPushNotification">
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="landline-Number">Notification
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <textarea id="add_message" [disabled]="isView" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                        data-parsley-validation-threshold="10" name="PushNotificationText" #PushNotificationText="ngModel" [(ngModel)]="notifications.PushNotificationText"></textarea>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                          <button type="submit" class="btn btn-success" *ngIf="!isView"><i class="icon_spac fa fa-floppy-o" ></i>Add</button>
+                          <button class="btn btn-primary" type="button" (click)="backRedirection()" data-launch-view="tourtype_table"><i class="icon_spac fa fa-close"></i>Cancel</button>
+                        </div>
+                      </div>
+                </div>
+                </form>
+              </div>
+            
+            </div><!-- x_panel end -->
+      </div>
+
+        
+    </div>

@@ -1,0 +1,230 @@
+<div class="col-md-3 left_col">
+  <div class="left_col scroll-view">
+    <!-- <div class="navbar nav_title" style="border: 0;">
+      <a routerLink="/" routerLinkActive="active" class="site_title">
+        <i class="fa fa-paw"></i>
+        <span>AMT</span>
+      </a>
+    </div> -->
+
+    <div class="clearfix"></div>
+
+    <!-- menu profile quick info -->
+    <div class="profile clearfix">
+      <div class="profile_pic">
+        <img src="../assets/images/img.jpg" alt="..." class="img-circle profile_img">
+      </div>
+      <div class="profile_info">
+        <span>Welcome,</span>
+        <h2>Admin</h2>
+      </div>
+    </div>
+    <!-- /menu profile quick info -->
+
+    <br />
+
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+          <li>
+            <a routerLink="/" routerLinkActive="active">
+              <i class="fa fa-home"></i>Dashboard</a>
+          </li>
+          <li>
+            <a>
+              <i class="fa fa-edit"></i> Manage
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <ul class="nav child_menu">
+              <!-- <li>
+                <a routerLink="/manage/menus" routerActivated="active">Menus</a>
+              </li> -->
+              <li>
+                <a routerLink="/manage/flight_class" routerActivated="active">Flight Class</a>
+              </li>
+              <!-- <li>
+                <a routerLink="/manage/company" routerActivated="active">Company</a>
+              </li> -->
+              <li>
+                <a routerLink="/manage/branch" routerActivated="active">Branch</a>
+              </li>
+              <li>
+                <a routerLink="/manage/hotel" routerActivated="active">Hotel</a>
+              </li>
+              <li>
+                <a routerLink="/manage/room_type" routerActivated="active">Room Type</a>
+              </li>
+              <li>
+                <a routerLink="/manage/cartype" routerActivated="active">Car Type</a>
+              </li>
+              <li>
+                <a routerLink="/manage/currency" routerActivated="active">Currency</a>
+              </li>
+              <!-- <li>
+                <a routerLink="/manage/inclusion_exclusion" routerActivated="active">Inclusion Exclusion</a>
+              </li> -->
+              <!-- <li>
+                <a routerLink="/manage/review" routerActivated="active">Review</a>
+              </li> -->
+              <li>
+                <a routerLink="manage/facility_type" routerActivated="active">Facility Type</a>
+              </li>
+              <li>
+                <a routerLink="/manage/way_to_reach" routerActivated="active">Way To Reach</a>
+              </li>
+              <li>
+                <a routerLink="/manage/attraction" routerActivated="active">Attraction</a>
+              </li>
+              <li>
+                <a routerLink="/manage/country" routerActivated="active">Country</a>
+              </li>
+              <li>
+                <a routerLink="/manage/state" routerActivated="active">State</a>
+              </li>
+              <li>
+                <a routerLink="/manage/city" routerActivated="active">City</a>
+              </li>
+              <li>
+                <a routerLink="/manage/banner" routerActivated="active">Banner</a>
+              </li>
+              <!-- <li>
+                <a routerLink="/manage/cashback_management" routerActivated="active">Cashback Management</a>
+              </li> -->
+            </ul>
+          </li>
+
+          <li class="">
+            <a>
+              <i class="fa fa-desktop"></i>
+              <span> User Management</span>
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <ul class="nav child_menu">
+              <li>
+                <a [routerLink]="['user_management','admin_user']">Admin Users</a>
+              </li>
+              <!-- <li>
+                <a [routerLink]="['user_management' ,'admin_user_roles']">Admin User Roles</a>
+              </li> -->
+              <!-- <li>
+                <a [routerLink]="['user_management' ,'admin_user_rights']">Admin User Rights </a>
+              </li> -->
+              <li>
+                <a [routerLink]="['user_management','front_user']">Front Users</a>
+              </li>
+              <!-- <li>
+                <a [routerLink]="['user_management' ,'front_user_interest']">Front User Interest</a>
+              </li> -->
+              <!-- <li>
+                <a [routerLink]="['user_management' ,'front_user_wishlist']">Front User Wishlist </a>
+              </li> -->
+            </ul>
+          </li>
+          <li>
+            <a>
+              <i class="fa fa-table"></i> Tours
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <ul class="nav child_menu">
+              <li>
+                <a routerLink="/tour" routerLinkActive="active">Tour Type</a>
+              </li>
+              <li>
+                <a routerLink="/tour/tourcategory" routerLinkActive="active">Tour Category</a>
+              </li>
+              <li>
+                <a routerLink="/tour/tourdestination" routerLinkActive="active">Tour Destination</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a>
+              <i class="fa fa-bar-chart-o"></i> Packages
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <ul class="nav child_menu">
+              <li>
+                <a routerLink="/packages" routerLinkActive="active">Packages</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="">
+            <a>
+              <img src="../../../../assets/images/attraction_2.png" style="height: 27px;width: 22px;margin: -9px 5px -4px -1px;"> Attraction
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <ul class="nav child_menu">
+              <li>
+                <a routerLink="/attraction/attractiondetails" routerActivated="active">AttractionDetails</a>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+              <a>
+                 <i class="fa fa-thumbs-o-up"></i>Booking
+                <span class="fa fa-chevron-down"></span>
+              </a>
+              <ul class="nav child_menu">
+                <li>
+                  <a routerLink="/booking/list" routerActivated="active">Tour Booking</a>
+                </li>
+              </ul>
+            </li>
+          <li class="">
+            <a>
+              <i class="fa fa-windows"></i> Documents
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <ul class="nav child_menu">
+              <li>
+                <a routerLink="/documents/document_category" routerActivated="active">Document Category</a>
+              </li>
+              <li>
+                <a routerLink="/documents/document_upload" routerActivated="active">Document Upload</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="">
+            <a>
+              <i class="fa fa-windows"></i> Settings
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <ul class="nav child_menu">
+              <li>
+                <a routerLink="/settings/settings" routerActivated="active">Settings</a>
+              </li>
+
+            </ul>
+          </li>
+
+          <!-- <li>
+            <a routerLink="/invoice" routerLinkActive="active">
+              <i class="fa fa-inr"></i>Invoice</a>
+          </li> -->
+
+          <li>
+            <a>
+              <i class="fa fa-table"></i> Notifications
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <ul class="nav child_menu">
+              <li>
+                <a routerLink="/notification" routerLinkActive="active">Template</a>
+              </li>
+              <li>
+                <a routerLink="/notification/sendNotification" routerLinkActive="active">Send Notification</a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <!-- /sidebar menu -->
+  </div>
+</div>

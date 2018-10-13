@@ -1,0 +1,158 @@
+<div>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <div class="box-header">
+          <form id="faqForm" parsley-validate class="form-horizontal form-label-left" #faqForm="ngForm" (ngSubmit)="SaveFAQDetails()">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form group">
+                <input type="hidden" name="txtId" class="form-control" #ID="ngModel" [(ngModel)]="dfaq.ID">
+                <input type="hidden" name="txtDestId" class="form-control" #DestinationID="ngModel" [(ngModel)]="dfaq.DestinationID">
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question">Question
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <textarea id="txtQuestion" class="form-control" name="question" required #Question="ngModel" [(ngModel)]="dfaq.Question"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="answer">Answer
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <textarea id="txtAnswer" class="form-control" name="answer" required #Answer="ngModel" [(ngModel)]="dfaq.Answer"></textarea>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pin-code">Order No.
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="number" id="txtOrderNo" name="OrderNo" class="form-control col-md-7 col-xs-12" required #OrderNo="ngModel" [(ngModel)]="dfaq.OrderNo">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <select id="ddlIsActive" #value="ngModel" class="form-control" [(ngModel)]="isActiveId" name="Id">
+                    <option [ngValue]="null" disabled>Select Status</option>
+                    <option *ngFor="let isactive of DropdownIsActiveList" [ngValue]="isactive.id">
+                      {{isactive.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                  <button type="submit" class="btn btn-success" [disabled]="!faqForm.valid">
+                    <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+                  <button class="btn btn-primary" type="button" (click)="CancelForm()">
+                    <i class="icon_spac fa fa-close"></i>Cancel</button>
+                </div>
+              </div>
+              <div class="ln_solid"></div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="x_content" [style.visibility]="showTable ? 'visible' : 'hidden'">
+    <div class="box-header">
+      <!-- <div class="form-group">
+      <div class="row">
+        <div class="col-sm-2">
+          <select id="ddlAction" #value="ngModel" class="form-control" [(ngModel)]="nameId" name="Id">
+            <option [ngValue]="null" disabled>Choose your action</option>
+            <option [ngValue]="k.value" *ngFor="let k of actions">
+              {{k.label}}
+            </option>
+          </select>
+        </div>
+        <div class="col-sm-3">
+          <button type="button" class="btn btn-danger">
+            <i class="icon_spac fa fa-paper-plane"></i> Action</button>
+        </div>
+      </div>
+    </div> -->
+    </div>
+    <!-- box-header end -->
+    <div id="datatable-checkbox_wrapper_2" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+      <p-table #dt [value]="faqs" [columns]="cols" [paginator]="true" [rows]="25" [(selection)]="selectedFAQs" dataKey="ID" class="table table-striped table-bordered">
+        <ng-template pTemplate="caption">
+          <div style="text-align: right">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="FAQ Search " (input)="dt.filterGlobal($event.target.value, 'contains')"
+              style="width:auto">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th style="width: 4em">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              {{col.header}}
+              <span *ngIf="col.header != 'Image';">
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </span>
+            </th>
+            <th style="width:6em">Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-di>
+          <tr [pSelectableRow]="rowData">
+            <td>
+              <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+            <td [hidden]="true">{{di.ID}}</td>
+            <td [hidden]="true">{{di.DestinationID}}</td>
+            <td>{{di.Question}}</td>
+            <td>{{di.Answer}}</td>
+            <td>{{di.OrderNo}}</td>
+            <td>
+              <span *ngIf="di.IsActive == true;else elseInactiveBlock">
+                <input type="checkbox" checked data-toggle="toggle">
+              </span>
+              <ng-template #elseInactiveBlock>
+                <input type="checkbox" data-toggle="toggle">
+              </ng-template>
+            </td>
+            <td>
+              <button class="btn btn-info btn-xs" (click)="UpdateFAQ(di)">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button class="btn btn-danger btn-xs" (click)="DeleteFAQ(di)">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <!-- datatable end -->
+
+    </div>
+    <!-- datatable end -->
+  </div>
+  <!-- x_content -->
+  <div class="col-md-6 text-left">
+    <button type="submit" class="btn btn-primary" (click)="PreviousFAQ()">
+      <i class="icon_spac fa fa-floppy-o"></i>Previous</button>
+  </div>
+  <div class="col-md-6 text-right">
+    <button class="btn btn-primary" type="button" (click)="NextFAQ()">
+      <i class="icon_spac fa fa-close"></i>Next</button>
+  </div>
+</div>

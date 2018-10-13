@@ -1,0 +1,163 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <div class="x_panel">
+    <div class="x_content">
+      <div class="box-header">
+        <form id="destinationForm" parsley-validate class="form-horizontal form-label-left" #destinationForm="ngForm" (ngSubmit)="SaveDestinationForm()">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tour-type">Tour Type
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="ddlTourtype" name="tourType" required #value="ngModel" class="form-control" [(ngModel)]="tourId">
+                  <option [ngValue]="0" disabled>Select Tour Type</option>
+                  <option [ngValue]="t.ID" *ngFor="let t of tourTypes">
+                    {{t.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Category
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="ddlTourCategory" name="tourCategory" required multiple="multiple" class="select2_multiple form-control" #value="ngModel"
+                  [(ngModel)]="tourCatId">
+                  <option [ngValue]="0" disabled>Select Tour Category</option>
+                  <option [ngValue]="tc.ID" *ngFor="let tc of tourCategories">
+                    {{tc.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Country
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="ddlCountry" name="Country" required multiple="multiple" class="select2_multiple form-control" #value="ngModel"
+                  [(ngModel)]="countryId" (change)="onCountryChange($event.target.value)">
+                  <option [ngValue]="0" disabled>Select Country</option>
+                  <option [ngValue]="c.ID" *ngFor="let c of countries">
+                    {{c.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pin-code">Destination Name
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" id="txtDestinationName" name="DestinationName" class="form-control col-md-7 col-xs-12" placeholder="Destination"
+                  required [(ngModel)]="destination.DestinationName">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Best Time to Visit
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <select id="ddlFromMonth" name="FromMonth" required class="form-control" #value="ngModel" [(ngModel)]="fromMonthId">
+                  <option [ngValue]="0" disabled>Select From</option>
+                  <option [ngValue]="m.MonthID" *ngFor="let m of months">
+                    {{m.MonthName}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12 col-md-offset-1">
+                <select id="ddlToMonth" name="ToMonth" required class="form-control" #value="ngModel" [(ngModel)]="toMonthId">
+                  <option [ngValue]="0" disabled>Select To</option>
+                  <option [ngValue]="m.MonthID" *ngFor="let m of months">
+                    {{m.MonthName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">Description
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <textarea id="txtDescription" name="Description" class="form-control" name="message" placeholder="Description" [(ngModel)]="destination.Description"></textarea>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Hotel
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="ddlHotel" name="Hotel" required multiple="multiple" class="select2_multiple form-control" #value="ngModel" [(ngModel)]="hotelId">
+                  <option [ngValue]="0" disabled>Select Hotel</option>
+                  <option [ngValue]="h.HotelID" *ngFor="let h of hotels">
+                    {{h.HotelName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Currancy
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="ddlCurrency" name="currency" required #value="ngModel" class="form-control" [(ngModel)]="currencyId">
+                  <option [ngValue]="0" disabled>Select Currency</option>
+                  <option [ngValue]="c.ID" *ngFor="let c of currencies">
+                    {{c.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Email">Priority
+                <span class="required">*</span>
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="number" id="txtPriority" name="Priority" class="form-control col-md-7 col-xs-12" required placeholder="Priority"
+                  [(ngModel)]="destination.Priority">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status
+              </label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <select id="ddlIsActive" #value="ngModel" class="form-control" [(ngModel)]="isActiveId" name="Id">
+                  <option [ngValue]="null" disabled>Select Status</option>
+                  <option *ngFor="let isactive of DropdownIsActiveList" [ngValue]="isactive.id">
+                    {{isactive.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <button type="submit" class="btn btn-success" [disabled]="!destinationForm.valid">
+                  <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+                <button class="btn btn-primary" type="button" (click)="BacktoDestination()">
+                  <i class="icon_spac fa fa-close"></i>Cancel</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="buttonName != 'ADD';">
+  <div class="col-md-6 text-left">
+    <!-- <button type="submit" class="btn btn-primary" >
+    <i class="icon_spac fa fa-floppy-o"></i>Previous</button> -->
+  </div>
+  <div class="col-md-6 text-right">
+    <button class="btn btn-primary" type="button" (click)="NextDestination()">
+      <i class="icon_spac fa fa-close"></i>Next</button>
+  </div>
+</div>

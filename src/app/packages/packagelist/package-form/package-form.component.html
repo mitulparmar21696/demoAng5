@@ -1,0 +1,10 @@
+<div>
+  <ul id="packageNav" class="nav nav-tabs bar_tabs" role="tablist">
+    <li role="presentation" [id]="tab.label" class="" *ngFor="let tab of settingLinks" [class.disabled]="!tab.isActive">
+      <a [routerLink]="tab.link" routerLinkActive #rla="routerLinkActive">
+        {{tab.label}}
+      </a>
+    </li>
+  </ul>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,71 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <div class="x_panel">
+    <div class="x_content">
+      <div class="box-header">
+        <form id="packageHotelForm" parsley-validate class="form-horizontal form-label-left" #packageHotelForm="ngForm" (ngSubmit)="SaveHotelDetails()">
+          <div class="col-md-12 col-sm-12 col-xs-12" *ngFor="let h of hotelList;let i = index">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="txtCityName">City
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="hidden" [(ngModel)]="h.ID" name="id-{{i}}">
+                  <input type="hidden" [(ngModel)]="h.CityID" name="cityid-{{i}}">
+                  <input type="text" id="txtCityName" [(ngModel)]="h.CityName" name="cityName-{{i}}" class="form-control col-md-7 col-xs-12"
+                    disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pin-code">Hotel List
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <select class="form-control" [(ngModel)]="h.HotelID" name="HotelsList-{{i}}">
+                    <option [ngValue]="0" disabled>Select Hotel</option>
+                    <option *ngFor="let ht of h.Hotels" [ngValue]="ht.ID">
+                      {{ht.HotelName}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+              <div class="form-group">
+                <label class="control-label col-md-8 col-sm-8 col-xs-12" for="txtNoOfNights">No. Of Nights
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                  <input type="number" id="txtNoOfNights" required [(ngModel)]="h.NoOfNights" name="NoOfNights-{{i}}" class="form-control col-md-7 col-xs-12">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="ln_solid"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+              <button type="submit" class="btn btn-success" [disabled]="!packageHotelForm.valid || isClicked">
+                <i class="icon_spac fa fa-floppy-o"></i>{{buttonName}}</button>
+              <button class="btn btn-primary" type="button" (click)="CancelHotelDetails()">
+                <i class="icon_spac fa fa-close"></i>Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="col-md-6 text-left">
+  <button type="submit" class="btn btn-primary" (click)="PreviousPackagehotel()">
+    <i class="icon_spac fa fa-floppy-o"></i>Previous</button>
+</div>
+<div class="col-md-6 text-right">
+  <button class="btn btn-primary" type="button" (click)="NextPackagehotel()">
+    <i class="icon_spac fa fa-close"></i>Next</button>
+</div>
+<!-- col end -->

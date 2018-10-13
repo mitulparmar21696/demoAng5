@@ -1,0 +1,115 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Car Type</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li>
+          <a (click)="InsertCartype()">
+            <button type="button" class="btn btn-info btn-sm" data-launch-view="add_cartype_table">
+              <i class="icon_spac fa fa-pencil"></i> Add </button>
+          </a>
+        </li>
+        <li>
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <div class="box-header">
+        <form class="form-horizontal form-label-left">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-2">
+                <select id="value" #value="ngModel" class="form-control" [(ngModel)]="nameId" name="Id">
+                  <option [ngValue]="null" disabled>Choose your action</option>
+                  <option [ngValue]="k.value" *ngFor="let k of actions">
+                    {{k.label}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-sm-3">
+                <a (click)="CustomAction()">
+                  <button type="button" class="btn btn-danger">
+                    <i class="icon_spac fa fa-paper-plane"></i> Action</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- box-header end -->
+      <p-table #dt [value]="carTypes" [columns]="cols" [paginator]="true" [rows]="25" [(selection)]="selectedTTs" dataKey="ID"
+        class="table table-striped table-bordered">
+        <ng-template pTemplate="caption">
+          <div style="text-align: right">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Cartype Search " (input)="dt.filterGlobal($event.target.value, 'contains')"
+              style="width:auto">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th style="width: 4em">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              {{col.header}}
+              <span *ngIf="col.header != 'Image';">
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </span>
+            </th>
+            <th style="width:6em">Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-tt>
+          <tr [pSelectableRow]="rowData">
+            <td>
+              <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+            <td style="word-wrap: break-word;">{{tt.Name}}</td>
+            <!-- <td>{{tt.Description}}</td> -->
+            <td>
+              <ul class="list-inline" style="margin-top: 5px;margin-bottom: 0px !important;">
+                <li *ngIf="tt.Image">
+                  <img [src]="tt.Image" class="avatar" alt="Avatar">
+                </li>
+                <li *ngIf="!tt.Image">
+                  <img src="../../../../assets/images/user.png" class="avatar">
+                </li>
+              </ul>
+            </td>
+            <td>
+
+                <span *ngIf="tt.IsActive == true"  (click)="Status(0, tt)">
+                    <input type="checkbox" data-toggle="toggle" disabled [checked]="true"> 
+                  </span>
+                  <span *ngIf="tt.IsActive == false"  (click)="Status(1, tt)">
+                    <input type="checkbox" disabled data-toggle="toggle">
+                  </span>
+              <!-- <span *ngIf="tt.IsActive == true;else elseInactiveBlock" (click)="Status(0, tt)">
+                <input type="checkbox" checked data-toggle="toggle">
+              </span>
+              <ng-template #elseInactiveBlock  (click)="Status(1, tt)">
+                <input type="checkbox" data-toggle="toggle">
+              </ng-template> -->
+            </td>
+            <td>
+              <button class="btn btn-info btn-xs" (click)="UpdateCartype(tt)">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button class="btn btn-danger btn-xs" (click)="DeleteCartype(tt)">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <!-- datatable end -->
+    </div>
+    <!-- x_content -->
+  </div>
+  <!-- x_panel end -->
+</div>

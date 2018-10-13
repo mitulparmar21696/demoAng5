@@ -1,0 +1,31 @@
+export class FrontUser {
+    ID:string;
+    FirstName:string;
+    LastName:string;
+    EmailID:string;
+    Password:string;
+    Address1:string;
+    Address2:string;
+    CityName:string;
+    Pincode:string;
+    MobileNo:string;
+    Landline:string;
+    OfficeAddress1:string;
+    OfficeAddress2:string;
+    OfficeCity:string;
+    OfficePincode:string;
+    TypeofMeal:string;
+    SeatPreference:string;
+    DOB:string;
+    DOB1:string;
+    Anniversary1:string;
+    Anniversary:string;
+    MyInterest:string;
+    MyInterest1:any;
+     Others:string;
+    Alergy:string;
+    IsActive:number;
+    Email:string;
+    //only for listing
+    ProfileImage:string;
+}
