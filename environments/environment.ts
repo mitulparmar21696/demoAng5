@@ -5,6 +5,6 @@
 
 export const environment = {
     production: false,
-    //WebAPIUrl:'http://amtapi.aseuminfo.com/Adminpanel.svc/tourtype'
+    //WebAPIUrl:'e'
   };
   
